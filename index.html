@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Alisa 🌸</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=DM+Serif+Display&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pastel-pink: #ffc4d6;
+            --pastel-lavender: #e0bbff;
+            --pastel-blue: #b5e5ff;
+            --pastel-peach: #ffd4b3;
+            --pastel-mint: #c7f5e8;
+            --pastel-yellow: #fff4b3;
+            --cream: #fffef9;
+            --dark-text: #5a4a5f;
+            --shadow: rgba(138, 108, 142, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, var(--cream) 0%, #fff5f7 50%, #f5f3ff 100%);
+            color: var(--dark-text);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Floating hearts animation */
+        .heart-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 20px;
+            animation: float-up 8s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Header Section */
+        header {
+            text-align: center;
+            padding: 80px 20px 60px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .title {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            color: var(--dark-text);
+            margin-bottom: 15px;
+            animation: fade-in-down 1.2s ease-out;
+            text-shadow: 3px 3px 0px var(--pastel-pink);
+        }
+
+        .subtitle {
+            font-family: 'Caveat', cursive;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: #9575cd;
+            animation: fade-in-down 1.2s ease-out 0.3s both;
+        }
+
+        @keyframes fade-in-down {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Music Player */
+        .music-player {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 8px 25px var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 1000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fade-in 1s ease-out 0.6s both;
+        }
+
+        .music-player:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 35px var(--shadow);
+        }
+
+        .music-icon {
+            width: 24px;
+            height: 24px;
+            color: var(--dark-text);
+        }
+
+        .music-text {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Quote Section */
+        .quote-section {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+            text-align: center;
+            animation: fade-in 1s ease-out 0.9s both;
+        }
+
+        .quote-box {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 10px 40px var(--shadow);
+            position: relative;
+            transform: rotate(-1deg);
+            border: 3px solid var(--pastel-lavender);
+        }
+
+        .quote-box::before {
+            content: '"';
+            font-family: 'DM Serif Display', serif;
+            font-size: 80px;
+            color: var(--pastel-pink);
+            position: absolute;
+            top: -20px;
+            left: 20px;
+        }
+
+        .quote-text {
+            font-family: 'Caveat', cursive;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--dark-text);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .quote-author {
+            font-size: 1rem;
+            color: #9575cd;
+            font-weight: 500;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            max-width: 1400px;
+            margin: 80px auto;
+            padding: 0 20px;
+        }
+
+        .gallery-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(1.5rem, 2vw, 1rem);
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--dark-text);
+            animation: fade-in 1s ease-out 1.2s both;
+        }
+
+        .polaroid-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            padding: 20px;
+        }
+
+        .polaroid {
+            background: white;
+            padding: 15px;
+            padding-bottom: 60px;
+            box-shadow: 0 8px 30px var(--shadow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            animation: fade-in-up 0.8s ease-out both;
+        }
+
+        .polaroid:nth-child(odd) {
+            transform: rotate(-2deg);
+        }
+
+        .polaroid:nth-child(even) {
+            transform: rotate(2deg);
+        }
+
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.05) translateY(-10px);
+            box-shadow: 0 15px 50px var(--shadow);
+            z-index: 10;
+        }
+
+        .polaroid:nth-child(1) { animation-delay: 0.1s; border-top: 5px solid var(--pastel-pink); }
+        .polaroid:nth-child(2) { animation-delay: 0.2s; border-top: 5px solid var(--pastel-lavender); }
+        .polaroid:nth-child(3) { animation-delay: 0.3s; border-top: 5px solid var(--pastel-blue); }
+        .polaroid:nth-child(4) { animation-delay: 0.4s; border-top: 5px solid var(--pastel-peach); }
+        .polaroid:nth-child(5) { animation-delay: 0.5s; border-top: 5px solid var(--pastel-mint); }
+        .polaroid:nth-child(6) { animation-delay: 0.6s; border-top: 5px solid var(--pastel-yellow); }
+        .polaroid:nth-child(7) { animation-delay: 0.7s; border-top: 5px solid var(--pastel-pink); }
+        .polaroid:nth-child(8) { animation-delay: 0.8s; border-top: 5px solid var(--pastel-lavender); }
+
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(40px) rotate(0deg);
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .photo-frame {
+            width: 100%;
+            aspect-ratio: 9/16;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--pastel-pink) 0%, var(--pastel-lavender) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Caveat', cursive;
+            font-size: 24px;
+            color: white;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .caption {
+            font-family: 'Caveat', cursive;
+            font-size: 20px;
+            text-align: center;
+            color: var(--dark-text);
+            line-height: 1.4;
+        }
+
+        /* Tape decoration */
+        .polaroid::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 25px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Footer Message */
+        .footer-message {
+            text-align: center;
+            padding: 80px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-heart {
+            font-size: 60px;
+            margin-bottom: 20px;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+        }
+
+        .footer-text {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: var(--dark-text);
+            margin-bottom: 20px;
+        }
+
+        .footer-note {
+            font-family: 'Caveat', cursive;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: #9575cd;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .polaroid-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .music-player {
+                bottom: 20px;
+                right: 20px;
+                padding: 12px 20px;
+            }
+        }
+
+        /* Stickers decoration */
+        .sticker {
+            position: absolute;
+            font-size: 30px;
+            opacity: 0.7;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Flowers Background -->
+    <div class="heart-container" id="heartContainer"></div>
+
+    <!-- Header -->
+    <header>
+        <h1 class="title">alisaaa 🌸</h1>
+        <p class="subtitle">someone who brightens my days</p>
+    </header>
+
+    <!-- Music Player -->
+    <div class="music-player" onclick="toggleMusic()">
+        <svg class="music-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+        </svg>
+        <span class="music-text" id="musicStatus">Play Music</span>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <!-- You can add your music file here -->
+        <!-- <source src="your-music-file.mp3" type="audio/mpeg"> -->
+    </audio>
+
+    <!-- Quote Section -->
+    <div class="quote-section">
+        <div class="quote-box">
+            <p class="quote-text">
+                even though we haven't met yet, every conversation with you makes my days so much brighter
+            </p>
+            <p class="quote-author">— Specially for Alisa</p>
+        </div>
+    </div>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <h2 class="gallery-title">guess drawing is harder than i thought. no matter how much i draw, i still can’t capture how beautiful you are</h2>
+        <div class="polaroid-grid">
+            <!-- Polaroid 1 -->
+            <div class="polaroid">
+                <div class="photo-frame">
+                    <img src="photos/photo1.jpg" alt="Photo 1">
+                </div>
+                <p class="caption">the first photo that caught my attention... ✨</p>
+            </div>
+
+            <!-- Polaroid 2 -->
+            <div class="polaroid">
+                <div class="photo-frame">
+                    <img src="photos/photo2.jpg" alt="Photo 2">
+                </div>
+                <p class="caption">your smile always brightens my mood</p>
+            </div>
+
+            <!-- Polaroid 3 -->
+            <div class="polaroid">
+                <div class="photo-frame">
+                    <img src="photos/photo3.jpg" alt="Photo 3">
+                </div>
+                <p class="caption">random photo but somehow became my favorite </p>
+            </div>
+
+            <!-- Polaroid 4 -->
+            <div class="polaroid">
+                <div class="photo-frame">
+                    <img src="photos/photo4.jpg" alt="Photo 4">
+                </div>
+                <p class="caption">your vibes are always full of positive energy! </p>
+            </div>
+
+            <!-- Polaroid 5 -->
+            <div class="polaroid">
+                <div class="photo-frame">
+                    <img src="photos/photo5.jpg" alt="Photo 5">
+                </div>
+                <p class="caption">somehow makes me want to know you more</p>
+            </div>
+
+            <!-- Polaroid 6 -->
+            <div class="polaroid">
+                <div class="photo-frame">
+                    <img src="photos/photo6.jpg" alt="Photo 6">
+                </div>
+                <p class="caption">can't wait to actually meet you someday</p>
+            </div>
+
+            <!-- Polaroid 7 -->
+            <div class="polaroid">
+                <div class="photo-frame">
+                    <img src="photos/photo7.jpg" alt="Photo 7">
+                </div>
+                <p class="caption">every picture tells a story I want to know</p>
+            </div>
+
+            <!-- Polaroid 8 -->
+            <div class="polaroid">
+                <div class="photo-frame">
+                    <img src="photos/photo8.jpg" alt="Photo 8">
+                </div>
+                <p class="caption">here's to new beginnings and beautiful moments</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Message -->
+    <div class="footer-message">
+        <div class="footer-heart">🌸</div>
+        <p class="footer-text">Happy Valentine's Day, Alisa!</p>
+        <p class="footer-note">thank you for making my days more exciting. hope we can meet soon! 🌸</p>
+    </div>
+
+    <script>
+        // Floating Flowers Animation
+        function createFloatingHeart() {
+            const heartContainer = document.getElementById('heartContainer');
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.innerHTML = ['🌸', '🌺', '🌻', '🌷', '🌹', '💐'][Math.floor(Math.random() * 6)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
+            heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
+            heartContainer.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 8000);
+        }
+
+        // Create flowers periodically
+        setInterval(createFloatingHeart, 800);
+
+        // Music Player Toggle
+        let isPlaying = false;
+        function toggleMusic() {
+            const music = document.getElementById('bgMusic');
+            const status = document.getElementById('musicStatus');
+            
+            if (isPlaying) {
+                music.pause();
+                status.textContent = 'Play Music';
+                isPlaying = false;
+            } else {
+                music.play().catch(e => {
+                    console.log('Music play failed:', e);
+                    status.textContent = 'Add music file';
+                });
+                status.textContent = 'Pause Music';
+                isPlaying = true;
+            }
+        }
+
+        // Add hover effect to polaroids
+        document.querySelectorAll('.polaroid').forEach(polaroid => {
+            polaroid.addEventListener('mouseenter', function() {
+                this.style.zIndex = '100';
+            });
+            
+            polaroid.addEventListener('mouseleave', function() {
+                setTimeout(() => {
+                    this.style.zIndex = '';
+                }, 400);
+            });
+        });
+
+        // Random rotation on load for more natural scrapbook feel
+        document.querySelectorAll('.polaroid').forEach((polaroid, index) => {
+            const randomRotation = (Math.random() - 0.5) * 6;
+            polaroid.style.setProperty('--random-rotation', `${randomRotation}deg`);
+        });
+
+        // Add parallax effect on scroll for quotes
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const quote = document.querySelector('.quote-box');
+            if (quote) {
+                quote.style.transform = `rotate(-1deg) translateY(${scrolled * 0.1}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
