@@ -203,39 +203,117 @@
             padding: 20px;
         }
 
+        /* POLAROID FLIP EFFECT */
         .polaroid {
+            background: transparent;
+            perspective: 1000px;
+            cursor: pointer;
+            position: relative;
+            animation: fade-in-up 0.8s ease-out both;
+            height: fit-content;
+        }
+
+        .polaroid-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .polaroid.flipped .polaroid-inner {
+            transform: rotateY(180deg);
+        }
+
+        .polaroid-front,
+        .polaroid-back {
             background: white;
             padding: 15px;
             padding-bottom: 60px;
             box-shadow: 0 8px 30px var(--shadow);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
             position: relative;
-            animation: fade-in-up 0.8s ease-out both;
+            border-radius: 3px;
         }
 
-        .polaroid:nth-child(odd) {
+        .polaroid-front {
+            transform: rotateY(0deg);
+        }
+
+        .polaroid-back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            gap: 15px;
+        }
+
+        .back-message {
+            font-family: 'Caveat', cursive;
+            font-size: 22px;
+            color: var(--dark-text);
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .polaroid:nth-child(odd) .polaroid-inner {
             transform: rotate(-2deg);
         }
 
-        .polaroid:nth-child(even) {
+        .polaroid:nth-child(even) .polaroid-inner {
             transform: rotate(2deg);
         }
 
-        .polaroid:hover {
-            transform: rotate(0deg) scale(1.05) translateY(-10px);
-            box-shadow: 0 15px 50px var(--shadow);
-            z-index: 10;
+        .polaroid.flipped:nth-child(odd) .polaroid-inner {
+            transform: rotate(-2deg) rotateY(180deg);
         }
 
-        .polaroid:nth-child(1) { animation-delay: 0.1s; border-top: 5px solid var(--pastel-pink); }
-        .polaroid:nth-child(2) { animation-delay: 0.2s; border-top: 5px solid var(--pastel-lavender); }
-        .polaroid:nth-child(3) { animation-delay: 0.3s; border-top: 5px solid var(--pastel-blue); }
-        .polaroid:nth-child(4) { animation-delay: 0.4s; border-top: 5px solid var(--pastel-peach); }
-        .polaroid:nth-child(5) { animation-delay: 0.5s; border-top: 5px solid var(--pastel-mint); }
-        .polaroid:nth-child(6) { animation-delay: 0.6s; border-top: 5px solid var(--pastel-yellow); }
-        .polaroid:nth-child(7) { animation-delay: 0.7s; border-top: 5px solid var(--pastel-pink); }
-        .polaroid:nth-child(8) { animation-delay: 0.8s; border-top: 5px solid var(--pastel-lavender); }
+        .polaroid.flipped:nth-child(even) .polaroid-inner {
+            transform: rotate(2deg) rotateY(180deg);
+        }
+
+        .polaroid:hover .polaroid-inner {
+            transform: rotate(0deg) scale(1.05) translateY(-10px);
+        }
+
+        .polaroid.flipped:hover .polaroid-inner {
+            transform: rotate(0deg) scale(1.05) translateY(-10px) rotateY(180deg);
+        }
+
+        .polaroid:nth-child(1) { animation-delay: 0.1s; }
+        .polaroid:nth-child(2) { animation-delay: 0.2s; }
+        .polaroid:nth-child(3) { animation-delay: 0.3s; }
+        .polaroid:nth-child(4) { animation-delay: 0.4s; }
+        .polaroid:nth-child(5) { animation-delay: 0.5s; }
+        .polaroid:nth-child(6) { animation-delay: 0.6s; }
+        .polaroid:nth-child(7) { animation-delay: 0.7s; }
+        .polaroid:nth-child(8) { animation-delay: 0.8s; }
+
+        .polaroid:nth-child(1) .polaroid-front { border-top: 5px solid var(--pastel-pink); }
+        .polaroid:nth-child(2) .polaroid-front { border-top: 5px solid var(--pastel-lavender); }
+        .polaroid:nth-child(3) .polaroid-front { border-top: 5px solid var(--pastel-blue); }
+        .polaroid:nth-child(4) .polaroid-front { border-top: 5px solid var(--pastel-peach); }
+        .polaroid:nth-child(5) .polaroid-front { border-top: 5px solid var(--pastel-mint); }
+        .polaroid:nth-child(6) .polaroid-front { border-top: 5px solid var(--pastel-yellow); }
+        .polaroid:nth-child(7) .polaroid-front { border-top: 5px solid var(--pastel-pink); }
+        .polaroid:nth-child(8) .polaroid-front { border-top: 5px solid var(--pastel-lavender); }
+
+        .polaroid:nth-child(1) .polaroid-back { background: linear-gradient(135deg, var(--pastel-pink), #fff); }
+        .polaroid:nth-child(2) .polaroid-back { background: linear-gradient(135deg, var(--pastel-lavender), #fff); }
+        .polaroid:nth-child(3) .polaroid-back { background: linear-gradient(135deg, var(--pastel-blue), #fff); }
+        .polaroid:nth-child(4) .polaroid-back { background: linear-gradient(135deg, var(--pastel-peach), #fff); }
+        .polaroid:nth-child(5) .polaroid-back { background: linear-gradient(135deg, var(--pastel-mint), #fff); }
+        .polaroid:nth-child(6) .polaroid-back { background: linear-gradient(135deg, var(--pastel-yellow), #fff); }
+        .polaroid:nth-child(7) .polaroid-back { background: linear-gradient(135deg, var(--pastel-pink), #fff); }
+        .polaroid:nth-child(8) .polaroid-back { background: linear-gradient(135deg, var(--pastel-lavender), #fff); }
 
         @keyframes fade-in-up {
             from {
@@ -305,6 +383,24 @@
             background: rgba(255, 255, 255, 0.7);
             border: 1px solid rgba(0, 0, 0, 0.1);
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        /* Flip indicator */
+        .flip-hint {
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            font-size: 12px;
+            color: #9575cd;
+            opacity: 0.6;
+            font-weight: 500;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .polaroid:hover .flip-hint {
+            opacity: 1;
         }
 
         /* Footer Message */
@@ -388,7 +484,7 @@
 
     <audio id="bgMusic" loop>
         <!-- You can add your music file here -->
-    <source src="music/background-music.mp3" type="audio/mpeg">
+        <source src="music/background-music.mp3" type="audio/mpeg">
         <!-- <source src="your-music-file.mp3" type="audio/mpeg"> -->
     </audio>
 
@@ -404,70 +500,134 @@
 
     <!-- Gallery Section -->
     <section class="gallery-section">
-        <h2 class="gallery-title">guess drawing is harder than i thought. no matter how much i draw, i still can’t capture how beautiful you are</h2>
+        <h2 class="gallery-title">guess drawing is harder than i thought. no matter how much i draw, i still can't capture how beautiful you are<br><small style="font-size: 0.7em; color: #9575cd; font-family: 'Caveat', cursive;">✨ click the photos to reveal a secret message ✨</small></h2>
         <div class="polaroid-grid">
             <!-- Polaroid 1 -->
-            <div class="polaroid">
-                <div class="photo-frame">
-                    <img src="photos/photo1.jpg" alt="Photo 1">
+            <div class="polaroid" onclick="flipPolaroid(this)">
+                <div class="polaroid-inner">
+                    <div class="polaroid-front">
+                        <div class="photo-frame">
+                            <img src="photos/photo1.jpg" alt="Photo 1">
+                        </div>
+                        <p class="caption">the first photo that caught my attention... ✨</p>
+                        <span class="flip-hint">tap to flip 🔄</span>
+                    </div>
+                    <div class="polaroid-back">
+                        <p class="back-message">that moment when i first saw this photo, i knew there was something special about you</p>
+                    </div>
                 </div>
-                <p class="caption">the first photo that caught my attention... ✨</p>
             </div>
 
             <!-- Polaroid 2 -->
-            <div class="polaroid">
-                <div class="photo-frame">
-                    <img src="photos/photo2.jpg" alt="Photo 2">
+            <div class="polaroid" onclick="flipPolaroid(this)">
+                <div class="polaroid-inner">
+                    <div class="polaroid-front">
+                        <div class="photo-frame">
+                            <img src="photos/photo2.jpg" alt="Photo 2">
+                        </div>
+                        <p class="caption">your smile always brightens my mood</p>
+                        <span class="flip-hint">tap to flip 🔄</span>
+                    </div>
+                    <div class="polaroid-back">
+                        <p class="back-message">your smile is contagious, it makes me smile too even on my worst days</p>
+                    </div>
                 </div>
-                <p class="caption">your smile always brightens my mood</p>
             </div>
 
             <!-- Polaroid 3 -->
-            <div class="polaroid">
-                <div class="photo-frame">
-                    <img src="photos/photo3.jpg" alt="Photo 3">
+            <div class="polaroid" onclick="flipPolaroid(this)">
+                <div class="polaroid-inner">
+                    <div class="polaroid-front">
+                        <div class="photo-frame">
+                            <img src="photos/photo3.jpg" alt="Photo 3">
+                        </div>
+                        <p class="caption">random photo but somehow became my favorite</p>
+                        <span class="flip-hint">tap to flip 🔄</span>
+                    </div>
+                    <div class="polaroid-back">
+                        <p class="back-message">sometimes the most random moments create the best memories, just like this one</p>
+                    </div>
                 </div>
-                <p class="caption">random photo but somehow became my favorite </p>
             </div>
 
             <!-- Polaroid 4 -->
-            <div class="polaroid">
-                <div class="photo-frame">
-                    <img src="photos/photo4.jpg" alt="Photo 4">
+            <div class="polaroid" onclick="flipPolaroid(this)">
+                <div class="polaroid-inner">
+                    <div class="polaroid-front">
+                        <div class="photo-frame">
+                            <img src="photos/photo4.jpg" alt="Photo 4">
+                        </div>
+                        <p class="caption">your vibes are always full of positive energy!</p>
+                        <span class="flip-hint">tap to flip 🔄</span>
+                    </div>
+                    <div class="polaroid-back">
+                        <p class="back-message">being around your energy (even virtually) makes everything feel lighter and happier</p>
+                    </div>
                 </div>
-                <p class="caption">your vibes are always full of positive energy! </p>
             </div>
 
             <!-- Polaroid 5 -->
-            <div class="polaroid">
-                <div class="photo-frame">
-                    <img src="photos/photo5.jpg" alt="Photo 5">
+            <div class="polaroid" onclick="flipPolaroid(this)">
+                <div class="polaroid-inner">
+                    <div class="polaroid-front">
+                        <div class="photo-frame">
+                            <img src="photos/photo5.jpg" alt="Photo 5">
+                        </div>
+                        <p class="caption">somehow makes me want to know you more</p>
+                        <span class="flip-hint">tap to flip 🔄</span>
+                    </div>
+                    <div class="polaroid-back">
+                        <p class="back-message">every time we talk, i discover something new and amazing about you... and i want to know everything</p>
+                    </div>
                 </div>
-                <p class="caption">somehow makes me want to know you more</p>
             </div>
 
             <!-- Polaroid 6 -->
-            <div class="polaroid">
-                <div class="photo-frame">
-                    <img src="photos/photo6.jpg" alt="Photo 6">
+            <div class="polaroid" onclick="flipPolaroid(this)">
+                <div class="polaroid-inner">
+                    <div class="polaroid-front">
+                        <div class="photo-frame">
+                            <img src="photos/photo6.jpg" alt="Photo 6">
+                        </div>
+                        <p class="caption">can't wait to actually meet you someday</p>
+                        <span class="flip-hint">tap to flip 🔄</span>
+                    </div>
+                    <div class="polaroid-back">
+                        <p class="back-message">the day we finally meet will be one of the best days of my life, i'm sure of it</p>
+                    </div>
                 </div>
-                <p class="caption">can't wait to actually meet you someday</p>
             </div>
 
             <!-- Polaroid 7 -->
-            <div class="polaroid">
-                <div class="photo-frame">
-                    <img src="photos/photo7.jpg" alt="Photo 7">
+            <div class="polaroid" onclick="flipPolaroid(this)">
+                <div class="polaroid-inner">
+                    <div class="polaroid-front">
+                        <div class="photo-frame">
+                            <img src="photos/photo7.jpg" alt="Photo 7">
+                        </div>
+                        <p class="caption">every picture tells a story i want to know</p>
+                        <span class="flip-hint">tap to flip 🔄</span>
+                    </div>
+                    <div class="polaroid-back">
+                        <p class="back-message">i want to be part of your story, create new chapters together, and make beautiful memories</p>
+                    </div>
                 </div>
-                <p class="caption">every picture tells a story i want to know</p>
             </div>
 
             <!-- Polaroid 8 -->
-            <div class="polaroid">
-                <div class="photo-frame">
-                    <img src="photos/photo8.jpg" alt="Photo 8">
+            <div class="polaroid" onclick="flipPolaroid(this)">
+                <div class="polaroid-inner">
+                    <div class="polaroid-front">
+                        <div class="photo-frame">
+                            <img src="photos/photo8.jpg" alt="Photo 8">
+                        </div>
+                        <p class="caption">here's to new beginnings and beautiful moments</p>
+                        <span class="flip-hint">tap to flip 🔄</span>
+                    </div>
+                    <div class="polaroid-back">
+                        <p class="back-message">this is just the beginning of something beautiful... happy valentine's day, alisa 💝</p>
+                    </div>
                 </div>
-                <p class="caption">here's to new beginnings and beautiful moments</p>
             </div>
         </div>
     </section>
@@ -480,6 +640,11 @@
     </div>
 
     <script>
+        // Polaroid Flip Function
+        function flipPolaroid(element) {
+            element.classList.toggle('flipped');
+        }
+
         // Floating Flowers Animation
         function createFloatingHeart() {
             const heartContainer = document.getElementById('heartContainer');
@@ -519,25 +684,6 @@
             }
         }
 
-        // Add hover effect to polaroids
-        document.querySelectorAll('.polaroid').forEach(polaroid => {
-            polaroid.addEventListener('mouseenter', function() {
-                this.style.zIndex = '100';
-            });
-            
-            polaroid.addEventListener('mouseleave', function() {
-                setTimeout(() => {
-                    this.style.zIndex = '';
-                }, 400);
-            });
-        });
-
-        // Random rotation on load for more natural scrapbook feel
-        document.querySelectorAll('.polaroid').forEach((polaroid, index) => {
-            const randomRotation = (Math.random() - 0.5) * 6;
-            polaroid.style.setProperty('--random-rotation', `${randomRotation}deg`);
-        });
-
         // Add parallax effect on scroll for quotes
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
@@ -546,6 +692,16 @@
                 quote.style.transform = `rotate(-1deg) translateY(${scrolled * 0.1}px)`;
             }
         });
+
+        // Add touch support for mobile
+        if ('ontouchstart' in window) {
+            document.querySelectorAll('.polaroid').forEach(polaroid => {
+                polaroid.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    flipPolaroid(this);
+                });
+            });
+        }
     </script>
 </body>
 </html>
